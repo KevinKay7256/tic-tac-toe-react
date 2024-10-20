@@ -11,15 +11,9 @@ function GameCell({ cellItem, index }) {
   const { updateBoard, game } = useContext(GameContext);
 
   const cellClickHandler = () => {
-<<<<<<< HEAD
-    updateBoard(index)
-    checkForWinner(game.board)
-    
-=======
     updateBoard(index);
     checkForWinner(game.board);
 
->>>>>>> dev
     // if(result) {
 
     // }
