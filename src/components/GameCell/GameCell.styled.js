@@ -7,10 +7,20 @@ const CellStyle = styled.button`
   border: none;
   width: 10rem;
   height: 10rem;
-  border-radius: 10px;
+  border-radius: 2.5rem;
   box-shadow: 5px 10px grey;
   cursor: pointer;
 
+  &:hover {
+    .outline_icon {
+      path {
+        stroke: ${(props) => props.theme.colors.primary};
+        stroke-width: 2;
+      }
+    }
+  }
 `;
+
+
 
 export default CellStyle;
