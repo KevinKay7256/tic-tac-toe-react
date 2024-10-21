@@ -8,10 +8,12 @@ export const GameContextProvider = (props) => {
     player1: {
       choice: "x",
       name: "Kevin",
+      score: 0,
     },
     player2: {
       choice: "o",
       name: "Nompilo",
+      score: 0,
     },
     turn: "x",
   });
@@ -26,11 +28,44 @@ export const GameContextProvider = (props) => {
     });
   };
 
+  const resetBoard = () => {
+    setGame({
+      ...game,
+      board: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    });
+  };
+
+  const roundComplete = () => {
+    if(game.turn === game.player1.choice) {
+      console.log("Player 1 wins")
+      setGame({
+        ...game,
+        player1: {
+          ...game.player1,
+          score: game.player1.score + 1
+        }
+      })
+    } else if(game.turn === game.player2.choice) {
+      console.log("Player 2 wins")
+      setGame({
+        ...game,
+        player2: {
+          ...game.player2,
+          score: game.player2.score + 1
+        }
+      })
+    } else {
+      console.log("Draw")
+    }
+  }
+
   return (
     <GameContext.Provider
       value={{
         game,
         updateBoard,
+        resetBoard,
+        roundComplete,
       }}
     >
       {props.children}
