@@ -5,8 +5,8 @@ import { randomizeIndex } from "../../utils/MusicUtils";
 
 function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(randomizeIndex(playlist));
-  const [promise, setPromise] = useState(null);
+  const [currentSong] = useState(randomizeIndex(playlist));
+  const [setPromise] = useState(null);
   const playerRef = useRef(null);
 
   useEffect(() => {
