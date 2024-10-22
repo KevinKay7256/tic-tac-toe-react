@@ -17,13 +17,9 @@ function GameCell({ cellItem, index }) {
     updateBoard(index);
     const result = checkForWinner(game.board);
     if (result) {
-      roundComplete()
+      roundComplete(result);
       handleModal(<RoundOverModal />);
     }
-
-    // if(result) {
-
-    // }
   };
 
   if (cellItem === "x") {
