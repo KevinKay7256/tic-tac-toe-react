@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["columnbased"].includes(prop),
+})`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: ${(props) => (props.columnBased ? "column" : "row")};
+  flex-direction: ${(props) => (props.columnbased ? "column" : "row")};
   height: 80vh;
   width: 100vw;
   background-color: ${(props) => props.theme.colors.primary};
