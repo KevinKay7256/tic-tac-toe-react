@@ -1,4 +1,7 @@
 const checkForSequence = (option1, option2, option3) => {
+  if (option1 === null || option2 === null || option3 === null) {
+    return false;
+  }
   return option1 === option2 && option2 === option3;
 };
 export const checkForWinner = (board) => {
@@ -23,14 +26,21 @@ export const checkForWinner = (board) => {
   }
 
   //diagonal 1
-  if (board[0] === board[4] && board[4] === board[8]) {
+  if (checkForSequence(board[0], board[4], board[8])) {
     console.log("Diagonal Winner!!!");
     return true;
   }
 
   //diagonal 2
-  if (board[2] === board[4] && board[4] === board[6]) {
+  if (checkForSequence(board[2], board[4], board[6])) {
     console.log("Diagonal Winner!!!");
     return true;
   }
+
+  //check if the game has drawn
+  // the game is over or there is no winner
+  if (!board.includes(null)) {
+    return "Draw";
+  }
+  return false;
 };
