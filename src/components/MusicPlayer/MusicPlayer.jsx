@@ -16,7 +16,7 @@ function MusicPlayer() {
       return;
     }
     playerRef.current.pause();
-  }, [isPlaying]);
+  }, [isPlaying,]); // eslint-disable-next-line
 
   return (
     <MusicPlayerWrapper>
