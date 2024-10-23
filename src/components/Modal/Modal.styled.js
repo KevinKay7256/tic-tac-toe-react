@@ -16,13 +16,13 @@ export const ModalContainer = styled.div`
     max-width: 400px;
     margin: 0 auto;
     padding: 2px 1px;
-    color: ${(props) => props.theme.colors.primary};
     background: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    background-color: ${(props) => props.theme.colors.secondary};
 
     ${(props) => props.theme.media.mobile} {
         max-width: 280px;

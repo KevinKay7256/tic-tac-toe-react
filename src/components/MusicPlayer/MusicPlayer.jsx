@@ -8,6 +8,7 @@ import {
   MusicPlayerWrapper,
 } from "./MusicPlayer.styled";
 import { SfxContext } from "../../contexts/SfxContext";
+import {Text} from "../../styles/General.styled";
 
 function MusicPlayer() {
   const { hoverSfx, clickSfx } = useContext(SfxContext);
@@ -66,7 +67,7 @@ function MusicPlayer() {
         src={playlist[currentSong]}
         onEnded={shuffleHandler}
       ></audio>
-      <p>{displaySong}</p>
+      <Text>{displaySong}</Text>
     </MusicPlayerWrapper>
   );
 }

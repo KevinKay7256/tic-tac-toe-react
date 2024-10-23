@@ -17,18 +17,18 @@ function RoundOverModal() {
   return (
     <>
       <ModalHeader>
-        <Title>
+        <Title primary>
           {game.roundWinner
             ? `${game.roundWinner.name} wins round!`
             : "Round Drawn"}
         </Title>
       </ModalHeader>
       <ModalBody>
-        <Subtitle>Choices will be switched now.</Subtitle>
-        <Subtitle>
+        <Subtitle primary>Choices will be switched now.</Subtitle>
+        <Subtitle primary>
           {game.player1.name} : {game.player1.score}
         </Subtitle>
-        <Subtitle>
+        <Subtitle primary>
           {game.player2.name}: {game.player2.score}
         </Subtitle>
       </ModalBody>
