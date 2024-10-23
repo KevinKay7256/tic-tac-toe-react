@@ -30,9 +30,9 @@ function MusicPlayer() {
 
   const shuffleHandler = async () => {
     clickSfx();
-    setIsPlaying(false);
     await playPromise.then(() => {
       playerRef.current.pause();
+      setIsPlaying(false);
     });
 
     setCurrentSong(randomizeIndex(playlist));

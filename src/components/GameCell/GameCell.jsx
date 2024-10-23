@@ -10,7 +10,8 @@ import { ReactComponent as IconXOutline } from "../../assets/svgs/icon-x-outline
 import { ReactComponent as IconOOutline } from "../../assets/svgs/icon-o-outline.svg";
 import { SfxContext } from "../../contexts/SfxContext";
 
-function GameCell({ cellItem, index }) {
+function GameCell({ cellItem, index, isWinningCell }) {
+  console.log(isWinningCell);
   const { updateBoard, game, roundComplete } = useContext(GameContext);
   const { hoverSfx, clickSfx, winSfx, completedSfx } = useContext(SfxContext);
   const { handleModal } = useContext(ModalContext);
@@ -26,19 +27,21 @@ function GameCell({ cellItem, index }) {
       } else {
         completedSfx();
       }
-      handleModal(<RoundOverModal />);
+      setTimeout(() => {
+        handleModal(<RoundOverModal />);
+      }, 2000);
     }
   };
 
   if (cellItem === "x") {
     return (
-      <CellStyle>
+      <CellStyle isWinningCell={isWinningCell ?? false}>
         <IconX />
       </CellStyle>
     );
   } else if (cellItem === "o") {
     return (
-      <CellStyle>
+      <CellStyle isWinningCell={isWinningCell ?? false}>
         <IconO />
       </CellStyle>
     );

@@ -13,7 +13,7 @@ export const checkForWinner = (board) => {
   for (let i = 0; i < 9; i += 3) {
     if (checkForSequence(board[i], board[i + 1], board[i + 2])) {
       console.log("Row Winner!!!");
-      return true;
+      return [i, i + 1, i + 2];
     }
   }
 
@@ -21,20 +21,20 @@ export const checkForWinner = (board) => {
   for (let i = 0; i < 3; i += 1) {
     if (checkForSequence(board[i], board[i + 3], board[i + 6])) {
       console.log("Column Winner!!!");
-      return true;
+      return [i, i + 3, i + 6];
     }
   }
 
   //diagonal 1
   if (checkForSequence(board[0], board[4], board[8])) {
     console.log("Diagonal Winner!!!");
-    return true;
+    return [0, 4, 8];
   }
 
   //diagonal 2
   if (checkForSequence(board[2], board[4], board[6])) {
     console.log("Diagonal Winner!!!");
-    return true;
+    return [2, 4, 6];
   }
 
   //check if the game has drawn
