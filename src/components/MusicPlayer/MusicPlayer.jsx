@@ -1,33 +1,72 @@
-import React, { useEffect, useRef, useState } from "react";
-import { MusicPlayerWrapper } from "./MusicPlayer.styled";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { playlist } from "../../utils/MusicUtils/playlist";
 import { randomizeIndex } from "../../utils/MusicUtils";
+import {
+  PlayIcon,
+  PauseIcon,
+  ShuffleIcon,
+  MusicPlayerWrapper,
+} from "./MusicPlayer.styled";
+import { SfxContext } from "../../contexts/SfxContext";
 
 function MusicPlayer() {
+  const { hoverSfx, clickSfx } = useContext(SfxContext);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong] = useState(randomizeIndex(playlist));
-  const [setPromise] = useState(null);
+  const [currentSong, setCurrentSong] = useState(randomizeIndex(playlist));
+  const [playPromise, setPlayPromise] = useState(null);
   const playerRef = useRef(null);
 
   useEffect(() => {
     if (isPlaying) {
       const promise = playerRef.current.play();
-      setPromise(promise);
+      setPlayPromise(promise);
+      if(playerRef.current?.volume) 
+        playerRef.current.volume = 0.2
       return;
     }
     playerRef.current.pause();
-  }, [isPlaying, setPromise]); // eslint-disable-next-line
+  }, [isPlaying]); // eslint-disable-next-line
+
+  const shuffleHandler = async () => {
+    clickSfx();
+    setIsPlaying(false);
+    await playPromise.then(() => {
+      playerRef.current.pause();
+    });
+
+    setCurrentSong(randomizeIndex(playlist));
+    setIsPlaying(true);
+  };
+
+  const displaySong = playlist[currentSong].split("/")[6];
 
   return (
     <MusicPlayerWrapper>
       {isPlaying ? (
-        <button onClick={() => setIsPlaying(false)}>pause</button>
+        <PauseIcon
+          onClick={() => {
+            clickSfx();
+            setIsPlaying(false);
+          }}
+          onMouseEnter={() => hoverSfx()}
+        />
       ) : (
-        <button onClick={() => setIsPlaying(true)}>play</button>
+        <PlayIcon
+          onClick={() => {
+            clickSfx();
+            setIsPlaying(true);
+          }}
+          onMouseEnter={() => hoverSfx()}
+        />
       )}
-      <button>shuffle</button>
+      <ShuffleIcon onClick={shuffleHandler} onMouseEnter={() => hoverSfx()} />
 
-      <audio ref={playerRef} src={playlist[currentSong]}></audio>
+      <audio
+        ref={playerRef}
+        src={playlist[currentSong]}
+        onEnded={shuffleHandler}
+      ></audio>
+      <p>{displaySong}</p>
     </MusicPlayerWrapper>
   );
 }
